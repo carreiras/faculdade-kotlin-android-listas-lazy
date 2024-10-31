@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import carreiras.com.github.listas_lazy.model.Game
@@ -58,7 +59,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GamesScreen() {
 
@@ -95,8 +95,8 @@ fun GamesScreen() {
             }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        LazyRow(){
-            items(gamesListState){
+        LazyRow() {
+            items(gamesListState) {
                 StudioCard(game = it)
             }
         }
@@ -111,7 +111,9 @@ fun GamesScreen() {
 
 @Composable
 fun StudioCard(game: Game) {
-    Card(modifier = Modifier.size(100.dp).padding(end = 4.dp)) {
+    Card(modifier = Modifier
+        .size(100.dp)
+        .padding(end = 4.dp)) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -161,3 +163,26 @@ fun GameCard(game: Game) {
     }
 }
 
+@Preview(showBackground = true, name = "Games Screen Preview")
+@Composable
+fun PreviewGamesScreen() {
+    ListasLazyTheme {
+        GamesScreen()
+    }
+}
+
+@Preview(showBackground = true, name = "Studio Card Preview")
+@Composable
+fun PreviewStudioCard() {
+    ListasLazyTheme {
+        StudioCard(game = Game(1, "Example Game", "Example Studio", 2023))
+    }
+}
+
+@Preview(showBackground = true, name = "Game Card Preview")
+@Composable
+fun PreviewGameCard() {
+    ListasLazyTheme {
+        GameCard(game = Game(1, "Example Game", "Example Studio", 2023))
+    }
+}
